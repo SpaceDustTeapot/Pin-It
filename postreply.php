@@ -17,7 +17,7 @@
 */
 
 var_dump($_POST);
-$con = mysqli_connect("Address","Username","Pass","BBS");
+$con = mysqli_connect("Address","User","Pass","BBS");
 if(mysqli_connect_errno())
 {
  echo "<br>";
@@ -116,7 +116,7 @@ function ret()
 <head>
 </head>
 <!-- Don't worry Be happy -->
-<body style="margin-left:500px;background-color:#6699CC;color:#D00000;">
+<body style="margin-left:500px;background-color:#6699CC;color:#D00000;font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;">
 <?php
 echo "<h1>$Errmsg</h1>";
 

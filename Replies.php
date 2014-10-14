@@ -17,7 +17,7 @@
 */
 $lol = $_GET['OP'];
 		      
-$con = mysqli_connect("Address","Username","Pass","BBS");
+$con = mysqli_connect("Address","User","Pass","BBS");
 
 if(mysqli_connect_errno())
 {
@@ -75,7 +75,8 @@ while($row = mysqli_fetch_array($sql))
 
 </head>
 
-<body style="background-color:#6699CC;margin-left:500px;color:#FFFFFF;" >
+<body style="background-color:#6699CC;margin-left:500px;color:#FFFFFF;
+font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;" >
 <h1 style="color:#FFFFFF;">
 Hello World! <!--BoardTitle-->
 </h1>
@@ -89,7 +90,7 @@ Name   : <input type="text" name="Name" style="margin-left:0.59cm;">
 <input type="hidden" name="opnum" value="<?php echo "$lol"; ?>">
 <button type="submit" >Post! </button>
 <br>
-Email  : <input type="text" name="Email" style="margin-left:0.6cm;"> 
+Email  : <input type="text" name="Email" style="margin-left:0.63cm;"> 
 <br>
 Comment: <textarea name="Comment" rows="4" cols="50">
 </textarea>
