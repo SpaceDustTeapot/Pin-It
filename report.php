@@ -16,9 +16,27 @@
     along with Pin it!.  If not, see <http://www.gnu.org/licenses/>
 */
 
+var_dump($_POST);
+
+$thread_num = $_POST['ThreadNum'];
+$reason = $_POST['Reason'];
+
+$con = mysqli_connect("ADDRESS","USER","PASS","BBS");
 
 
+function create_Report_table($Connection)
+{
+ $sql="CREATE TABLE posts(PID INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(PID),Reported_Post int, Reason text)";
+ mysqli_query($Connection,$sql);
 
+}
+
+function send_Report($Connection,$Reason,$Thread_num)
+{
+ $sql = "INSERT INTO posts(Reported_Post,Reason) VALUES ('$Thread_num','$Reason')";
+ mysqli_query($Connection,$sql);
+
+}
 
 
 ?>
