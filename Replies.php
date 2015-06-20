@@ -17,7 +17,7 @@
 */
 $lol = $_GET['OP'];
 		      
-$con = mysqli_connect("Address","User","Pass","BBS");
+$con = mysqli_connect("ADDRESS","USER","PASS","BBS");
 
 if(mysqli_connect_errno())
 {
@@ -84,7 +84,7 @@ Hello World! <!--BoardTitle-->
 Post reply!
 </div>
 <br>
-<form action="postreply.php" method="POST">
+<form action="postreply.php" method="POST" enctype="multipart/form-data">
 <br>
 Name   : <input type="text" name="Name" style="margin-left:0.59cm;">
 <input type="hidden" name="opnum" value="<?php echo "$lol"; ?>">
@@ -94,6 +94,7 @@ Email  : <input type="text" name="Email" style="margin-left:0.63cm;">
 <br>
 Comment: <textarea name="Comment" rows="4" cols="50">
 </textarea>
+Image: <input id="uload" type="file" name="fileToUpload"></input>
 </form>
 <br>
 <hr style="margin-left:-17cm;margin-top:1cm;">

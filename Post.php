@@ -16,7 +16,7 @@
     along with Pin it!.  If not, see <http://www.gnu.org/licenses/>
 */
 var_dump($_POST);
-$con = mysqli_connect("Address","User","Pass","BBS");
+$con = mysqli_connect("ADDRESS","USER","PASS","BBS");
 if(mysqli_connect_errno())
 {
  echo "<br>";
@@ -65,15 +65,17 @@ else
  
 }
 
-$Errmsg = Func_Post($Name,$Email,$Comment,$con);
+$Errmsg = Func_Post($Name,$Email,$Comment,$con,$_FILES);
 
 
 }
-function Func_Post($name,$email,$comment,$CON)
+function Func_Post($name,$email,$comment,$CON,$file)
 {
+ $tgtdir = Upload_Image($file,$CON);
+
  if($comment != "")
   {
-  $sql="CREATE TABLE posts(PID INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(PID),isOP INT,Name CHAR(255), Email CHAR(255),OP int,Comment TEXT)";
+  $sql="CREATE TABLE posts(PID INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(PID),isOP INT,Name CHAR(255), Email CHAR(255),OP int,Comment TEXT,ImageLoc CHAR(255))";
   
   	//Execute Query; 
   	if(mysqli_query($CON,$sql))
@@ -91,7 +93,7 @@ function Func_Post($name,$email,$comment,$CON)
   	}
 
   //Insert information into Table :^)
-   mysqli_query($CON,"INSERT INTO posts(isOP,Name,Email,OP,Comment) VALUES ('1','$name','$email',0,'$comment')"); 
+   mysqli_query($CON,"INSERT INTO posts(isOP,Name,Email,OP,Comment,ImageLoc) VALUES ('1','$name','$email',0,'$comment','$tgtdir')"); 
   
   $error = "POST SUCESSFULL!";
   return $error;
@@ -105,6 +107,56 @@ function Func_Post($name,$email,$comment,$CON)
 function ret()
 {
  header("Location: index.html");
+}
+
+
+function Upload_Image($image,$CON)
+{
+
+//Check img varible
+echo "heck img<br>";
+echo $image['fileToUpload']['tmp_name'];
+echo "<br>Tmp name is!";
+
+	$filesize = 0;
+	$mode =0;
+	$target_dir = "uploads/images/";
+	$target_file = $target_dir . basename($image["fileToUpload"]["name"]);
+	$uploadOk = 1;
+	$Filetype = pathinfo($target_file,PATHINFO_EXTENSION);
+
+
+	if ($Filetype == "jpg" || $Filetype == "jpeg" || $Filetype == "png" || $Filetype == "gif" )
+	{
+	 	echo"img is valid"; 
+	}
+	else
+	{
+	 echo"<br>";
+ 		echo $Filetype;
+ 		echo "<br>";
+ 		echo "not a Image file";
+ 		$uploadOk = 0;
+	}
+
+	if($uploadOk == 0)
+	{
+		echo "Sorry, your file was not uploaded";
+
+	}
+	else
+	{
+	 	if(move_uploaded_file($image["fileToUpload"]["tmp_name"],$target_file))
+		{
+			  echo "File Uploaded";
+			// $uflag = uload_to_database($conn,$cat,$target_file,$nam,$size);
+			return $target_file;
+		}
+		else
+		{
+			echo "There was a issue";
+		}
+	}
 }
 
 ?>

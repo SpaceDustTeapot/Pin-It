@@ -18,7 +18,7 @@
 */
 
 
-$con = mysqli_connect("Address","User","Root","BBS");
+$con = mysqli_connect("ADDRESS","USER","PASS","BBS");
 
 if(mysqli_connect_errno())
 {
@@ -39,6 +39,7 @@ while($row = mysqli_fetch_array($sql))
 {
  $comm = $row['Comment'];
  if($row['isOP'] == 1)
+// if($row['isOP'] == 0)
  {
  echo "#" .$row['PID'];
  $pid = $row['PID'];
@@ -75,7 +76,7 @@ while($row = mysqli_fetch_array($sql))
 Hello World! <!--BoardTitle-->
 </h1>
 <br>
-<form action="Post.php" method="POST">
+<form action="Post.php" method="POST"  enctype="multipart/form-data">
 <br>
 Name   : <input type="text" name="Name" style="margin-left:0.59cm;">
 <button type="submit" >Post! </button>
@@ -84,6 +85,7 @@ Email  : <input type="text" name="Email" style="margin-left:0.63cm;">
 <br>
 Comment: <textarea name="Comment" rows="4" cols="50">
 </textarea>
+Image: <input id="uload" type="file" name="fileToUpload"></input>
 </form>
 <br>
 <hr style="margin-left:-17cm;margin-top:1cm;">
